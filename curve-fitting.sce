@@ -34,7 +34,7 @@ function [answer] = least_squares_n(order, x, y)
     A = []
     n = length(x)
     
-    // FIXME: do not calculate the same value more than one time
+    // FIXME: do not calculate the same value more than once
     for i=0:order
         for j=0:order
             A(i+1, j+1) = sum(x ^ (i+j))
