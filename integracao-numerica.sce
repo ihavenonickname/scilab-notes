@@ -19,3 +19,22 @@ function [integral] = integral_simpson_fixo(y, h)
     impares = miolo(2:2:(length(miolo))) .* 2
     integral = (h/3) * (sum(pares) + sum(impares) + y(1) + y($))
 endfunction
+
+function [h] = determinar_h_simpson(f, a, b, erro)
+    n = 1
+    r0 = integral_simpson(f, a, b, n)
+    
+    while n <= 1000
+      r1 = integral_simpson(f, a, b, n + 1)  
+      
+      if abs(r1 - r0) <= erro then
+          h = (b - a) / n
+          return
+      end
+      
+      r0 = r1
+      n = n + 1
+    end
+    
+    error('Limite de iterações alcançado')
+endfunction
